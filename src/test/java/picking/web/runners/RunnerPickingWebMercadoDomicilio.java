@@ -9,10 +9,10 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources/picking/web/features/PickingWebBack.feature",
         glue = "picking.web.definitions",
-        //tags = "@TestCase1",
+        tags = "@CaseMercadoDomicilio",
         snippets = SnippetType.CAMELCASE,
         plugin = "json:target/cucumber_json/cucumber.json"
 )
 
-public class RunnerPickingWeb {
+public class RunnerPickingWebMercadoDomicilio {
 }

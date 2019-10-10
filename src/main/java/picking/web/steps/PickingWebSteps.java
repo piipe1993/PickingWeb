@@ -1,12 +1,13 @@
 package picking.web.steps;
 
 
+import com.google.inject.internal.asm.$ClassTooLargeException;
 import net.thucydides.core.annotations.Step;
 import picking.web.pages.PickingWebPages;
 import picking.web.utilities.FuncionesComunes;
 
 
-
+import javax.swing.*;
 
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
 import static picking.web.utilities.FuncionesComunes.waitTime;
@@ -19,12 +20,25 @@ public class PickingWebSteps {
 
     @Step
     public void searchOrder(String order) {
-
         pickingWeb.open();
 //        funcionesComunes.fluentWaitVisibility(getDriver(),pickingWeb.getTxtTransporte(),pickingWeb.getTxtTransporte().getText().toString());
 //      funcionesComunes.waitWhileElementHasAttributeValue(pickingWeb.getWaitInPage(),"style", "block");
-        waitTime(15);
-       funcionesComunes.waitElement(pickingWeb.getFilterIcon());
+
+        order = JOptionPane.showInputDialog("Ingresa el numero del pedido");
+
+        //if OK is pushed then (if not strDialogResponse is null)
+        if (order == null) {
+            JOptionPane.showMessageDialog(null, "Presionaste cancelar: El navegador se cerrara");
+//           JOptionPane.showMessageDialog(null,"el programa continuara con el flujo para el pedido ingresado");
+            throw new AssertionError("No se ingreso el numero del pedido");
+        }
+
+
+//        order= JOptionPane.showInputDialog("Ingresa el numero del pedido");
+
+
+        waitTime(7);
+        funcionesComunes.waitElement(pickingWeb.getFilterIcon());
         pickingWeb.getFilterIcon().click();
         pickingWeb.getInputOrder().sendKeys(order);
         // pickingWeb.getCheckUnplanned().click();
@@ -135,7 +149,7 @@ public class PickingWebSteps {
     }
 
     @Step
-    public void confirmDeliveryCYR(){
+    public void confirmDeliveryCYR() {
         waitTime(4);
         pickingWeb.getSelectActions().click();
         pickingWeb.getIconPendingCollection().click();

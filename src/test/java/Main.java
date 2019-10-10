@@ -1,0 +1,38 @@
+import org.junit.internal.TextListener;
+import org.junit.runner.JUnitCore;
+import picking.web.runners.RunnerPickingWebMercadoCYR;
+import picking.web.runners.RunnerPickingWebMercadoDomicilio;
+import picking.web.utilities.MyExeption;
+
+import javax.swing.JOptionPane;
+
+public class Main {
+    public static void main(String[] args) {
+
+
+        JUnitCore jUnitCore = new JUnitCore();
+        jUnitCore.addListener(new TextListener(System.out));
+
+
+        int TipoModalidadEntrega = JOptionPane.showOptionDialog(
+                null,
+                "Selecciona la modalidad de entrega de tu pedido",
+                "Selector de Modalidad despacho",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null ,  // null para icono por defecto.
+                new Object[] { "A Domicilio", "Compra y Recoge" },   // null para YES, NO y CANCEL
+                "A Domicilio");
+
+        if (TipoModalidadEntrega == 0) {
+
+            jUnitCore.run(RunnerPickingWebMercadoDomicilio.class);
+
+        }else if (TipoModalidadEntrega == 1) {
+            jUnitCore.run(RunnerPickingWebMercadoCYR.class);
+
+        }else{
+            throw new MyExeption("No se eligio modalidad despacho del pedido");
+        }
+    }
+}
