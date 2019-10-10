@@ -1,0 +1,51 @@
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.58")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'net.serenity-bdd.aggregator'
+
+dependencies {
+
+    testCompile group: 'net.serenity-bdd', name: 'serenity-core', version: '2.0.58'
+    testCompile group: 'net.serenity-bdd', name: 'serenity-junit', version: '2.0.58'
+    testCompile('junit:junit:4.12')
+    testCompile('org.assertj:assertj-core:3.11.1')
+    testCompile('org.slf4j:slf4j-simple:1.7.25')
+    testCompile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.2.1.jre8'
+
+    compile group: 'net.serenity-bdd', name: 'serenity-core', version: '2.0.58'
+    compile group: 'net.serenity-bdd', name: 'serenity-junit', version: '2.0.58'
+    compile group: 'net.serenity-bdd', name: 'serenity-cucumber', version: '1.9.43'
+
+    //compile 'net.serenity-bdd.maven.plugins:serenity-maven-plugin:1.2.5-rc.6'
+    //compile 'org.apache.maven.plugins:maven-surefire-plugin:2.22.1'
+    //compile group: 'ru.yandex.qatools.ashot', name: 'ashot', version: '1.5.3'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.17'
+
+    // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
+    compile group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '7.2.1.jre8'
+    compile 'com.google.code.gson:gson:2.8.5'
+}
+/*
+tasks.withType(Test) {
+systemProperty 'webdriver.driver', System.getProperty('webdriver.driver', 'chrome')
+systemProperty 'tags', System.getProperty('tags', '')
+}
+gradle.startParameter.continueOnFailure = true
+*/

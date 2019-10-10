@@ -1,0 +1,67 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "line": 5,
+        "name": "Loggin in web site",
+        "description": "",
+        "type": "background",
+        "keyword": "Background",
+        "steps": []
+      },
+      {
+        "line": 28,
+        "name": "Validate the download of differents order types with different means of payment and discounts modality DP",
+        "description": "",
+        "id": "validate-the-download-to-the-database-of-market-orders;validate-the-download-of-differents-order-types-with-different-means-of-payment-and-discounts-modality-dp;;2",
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "error_message": "org.openqa.selenium.NoSuchElementException: Timed out after 10 seconds. Element not found\nFor documentation on this error, please visit: https://www.seleniumhq.org/exceptions/no_such_element.html\nBuild info: version: \u00273.141.59\u0027, revision: \u0027e82be7d358\u0027, time: \u00272018-11-14T08:17:03\u0027\nSystem info: host: \u0027SQA-1943\u0027, ip: \u0027192.168.56.1\u0027, os.name: \u0027Windows 10\u0027, os.arch: \u0027amd64\u0027, os.version: \u002710.0\u0027, java.version: \u00271.8.0_211\u0027\nDriver info: driver.version: unknown\r\n\tat net.thucydides.core.annotations.locators.SmartAjaxElementLocator.ajaxFindElement(SmartAjaxElementLocator.java:172)\r\n\tat net.thucydides.core.annotations.locators.SmartAjaxElementLocator.findElement(SmartAjaxElementLocator.java:124)\r\n\tat org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)\r\n\tat com.sun.proxy.$Proxy24.click(Unknown Source)\r\n\tat picking.web.steps.PickingWebSteps.goToPickingState(PickingWebSteps.java:43)\r\n\tat picking.web.steps.PickingWebSteps$$EnhancerByCGLIB$$74546f06.CGLIB$goToPickingState$4(\u003cgenerated\u003e)\r\n\tat picking.web.steps.PickingWebSteps$$EnhancerByCGLIB$$74546f06$$FastClassByCGLIB$$cf425352.invoke(\u003cgenerated\u003e)\r\n\tat net.sf.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)\r\n\tat net.thucydides.core.steps.StepInterceptor.invokeMethod(StepInterceptor.java:478)\r\n\tat net.thucydides.core.steps.StepInterceptor.executeTestStepMethod(StepInterceptor.java:463)\r\n\tat net.thucydides.core.steps.StepInterceptor.runTestStep(StepInterceptor.java:438)\r\n\tat net.thucydides.core.steps.StepInterceptor.runOrSkipMethod(StepInterceptor.java:179)\r\n\tat net.thucydides.core.steps.StepInterceptor.testStepResult(StepInterceptor.java:166)\r\n\tat net.thucydides.core.steps.StepInterceptor.intercept(StepInterceptor.java:72)\r\n\tat picking.web.steps.PickingWebSteps$$EnhancerByCGLIB$$74546f06.goToPickingState(\u003cgenerated\u003e)\r\n\tat picking.web.definitions.PickingWebDefinition.validate_the_complete_flow_from_the_picking_web_dispatch_window_of_the_buy_and_collect_market_order(PickingWebDefinition.java:28)\r\n\tat ✽.Validate the complete flow from the Picking web dispatch window of the buy and collect market order 948683429647(src/test/resources/picking/web/features/PickingWebBack.feature:24)\r\n",
+              "duration": 55218521000,
+              "status": "failed"
+            },
+            "line": 24,
+            "name": "Validate the complete flow from the Picking web dispatch window of the buy and collect market order 948683429647",
+            "match": {
+              "arguments": [
+                {
+                  "val": "948683429647",
+                  "offset": 100
+                }
+              ],
+              "location": "PickingWebDefinition.validate_the_complete_flow_from_the_picking_web_dispatch_window_of_the_buy_and_collect_market_order(String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Back"
+          },
+          {
+            "name": "@TestCase1"
+          }
+        ]
+      }
+    ],
+    "name": "Validate the download to the database of Market orders",
+    "description": "",
+    "id": "validate-the-download-to-the-database-of-market-orders",
+    "keyword": "Feature",
+    "uri": "src/test/resources/picking/web/features/PickingWebBack.feature",
+    "tags": [
+      {
+        "name": "@Back",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]
