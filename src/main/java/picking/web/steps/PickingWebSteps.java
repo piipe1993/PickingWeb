@@ -5,6 +5,7 @@ import com.google.inject.internal.asm.$ClassTooLargeException;
 import net.thucydides.core.annotations.Step;
 import picking.web.pages.PickingWebPages;
 import picking.web.utilities.FuncionesComunes;
+import picking.web.utilities.MyExeption;
 
 
 import javax.swing.*;
@@ -20,40 +21,49 @@ public class PickingWebSteps {
 
     @Step
     public void searchOrder(String order) {
-        pickingWeb.open();
-//        funcionesComunes.fluentWaitVisibility(getDriver(),pickingWeb.getTxtTransporte(),pickingWeb.getTxtTransporte().getText().toString());
+
+        try {
+//      funcionesComunes.fluentWaitVisibility(getDriver(), pickingWeb.getTxtTransporte(), pickingWeb.getTxtTransporte().getText().toString());
 //      funcionesComunes.waitWhileElementHasAttributeValue(pickingWeb.getWaitInPage(),"style", "block");
+            pickingWeb.open();
+            order = JOptionPane.showInputDialog("Ingresa el numero del pedido");
 
-        order = JOptionPane.showInputDialog("Ingresa el numero del pedido");
-
-        //if OK is pushed then (if not strDialogResponse is null)
-        if (order == null) {
-            JOptionPane.showMessageDialog(null, "Presionaste cancelar: El navegador se cerrara");
+            //if OK is pushed then (if not strDialogResponse is null)
+            if (order == null) {
+                JOptionPane.showMessageDialog(null, "Presionaste cancelar: El navegador se cerrara");
 //           JOptionPane.showMessageDialog(null,"el programa continuara con el flujo para el pedido ingresado");
-            throw new AssertionError("No se ingreso el numero del pedido");
+                throw new AssertionError("No se ingreso el numero del pedido");
+            }
+
+            waitTime(7);
+            funcionesComunes.waitElement(pickingWeb.getFilterIcon());
+            pickingWeb.getFilterIcon().click();
+            pickingWeb.getInputOrder().sendKeys(order);
+            // pickingWeb.getCheckUnplanned().click();
+            pickingWeb.getBtnApplyFilter().click();
+
+            waitTime(3);
+            if (!pickingWeb.getSelectActions().isDisplayed()) {
+                throw new MyExeption("Order not found");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Pedido ingresado: " + order + ", no fue encontrado");
+            throw new MyExeption("Order not found");
         }
 
-
-//        order= JOptionPane.showInputDialog("Ingresa el numero del pedido");
-
-
-        waitTime(7);
-        funcionesComunes.waitElement(pickingWeb.getFilterIcon());
-        pickingWeb.getFilterIcon().click();
-        pickingWeb.getInputOrder().sendKeys(order);
-        // pickingWeb.getCheckUnplanned().click();
-        pickingWeb.getBtnApplyFilter().click();
 
     }
 
     @Step
     public void goToPickingState() {
 //        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
+//
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Pedido ingresado: " + order + ", no fue encontrado");
+//            throw new MyExeption("Order not found");
 //        }
-        waitTime(5);
+        //waitTime(5);
         pickingWeb.getSelectActions().click();
         waitTime(2);
         pickingWeb.getIconActionPicking().click();
@@ -100,12 +110,22 @@ public class PickingWebSteps {
     }
 
     @Step
-    public void selectTransportBy(String transportType) {
+    public void selectTransportBy() {
         waitTime(6);
-        transportType = transportType.toLowerCase();
+
+        int transportType = JOptionPane.showOptionDialog(
+                null,
+                "Selecciona el tipo de transporte",
+                "Selector tipo transporte",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,  // null para icono por defecto.
+                new Object[]{"En carro", "Tradicional", "Colaborativo"},   // null para YES, NO y CANCEL
+                "En carro");
+
         switch (transportType) {
 
-            case "carro":
+            case 0:
                 pickingWeb.getSelectActions().click();
                 pickingWeb.getIconRequestTransport().click();
                 waitTime(4);
@@ -123,13 +143,13 @@ public class PickingWebSteps {
                 //  funcionesComunes.waitForJSandJQueryToLoad();
                 break;
 
-            case "tradicional":
+            case 1:
                 System.out.println("transporte tradicional ** Pasos pendientes");
                 // code block
                 break;
 
-            case "colaborativo":
-                System.out.println("trasnporte colaborativo ** pasos pendientes");
+            case 2:
+                System.out.println("transporte colaborativo ** pasos pendientes");
 
                 break;
             default:
@@ -140,26 +160,56 @@ public class PickingWebSteps {
 
     @Step
     public void confirmDelivery() {
-        //funcionesComunes.waitForJSandJQueryToLoad();
-        waitTime(5);
-        pickingWeb.getSelectActions().click();
-        pickingWeb.getIconConfirmDelivery().click();
-        waitTime(2);
+        try {
+            //funcionesComunes.waitForJSandJQueryToLoad();
+            waitTime(5);
+            pickingWeb.getSelectActions().click();
+            pickingWeb.getIconConfirmDelivery().click();
+            waitTime(2);
+            pickingWeb.getBtnSuccess().click();
+            waitTime(3);
+            pickingWeb.getBtnCancel().click();
+            waitTime(2);
+
+            JOptionPane.showMessageDialog(null, "El flujo del pedido se completo correctamente\nPRUEBA EXITOSA");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error En el proceso de cambio de estado a entregado, Element not found");
+//            throw new MyExeption("Element not found");
+        }
+
 
     }
 
     @Step
     public void confirmDeliveryCYR() {
-        waitTime(4);
-        pickingWeb.getSelectActions().click();
-        pickingWeb.getIconPendingCollection().click();
-        waitTime(2);
-        pickingWeb.getBtnSuccess().click();
-        pickingWeb.getBtnCancel().click();
-        waitTime(4);
-        pickingWeb.getSelectActions().click();
-        pickingWeb.getIconOrderDeliveredCYR().click();
-        waitTime(2);
+
+        try {
+
+            waitTime(4);
+            pickingWeb.getSelectActions().click();
+            pickingWeb.getIconPendingCollection().click();
+            waitTime(2);
+            pickingWeb.getBtnSuccess().click();
+            pickingWeb.getBtnCancel().click();
+            waitTime(4);
+            pickingWeb.getSelectActions().click();
+            pickingWeb.getIconOrderDeliveredCYR().click();
+            pickingWeb.getBtnSuccess().click();
+            pickingWeb.getBtnCancel().click();
+            waitTime(4);
+
+//            if (pickingWeb.getSelectActions().isDisplayed()) {
+//                JOptionPane.showMessageDialog(null,"No se puedo avanzar el pedido al estado 'Confirmar entrega'");
+//                throw new MyExeption("No se puedo avanzar el pedido al estado 'Confirmar entrega'");
+//            }
+
+            JOptionPane.showMessageDialog(null, "El flujo del pedido se completo correctamente.\nPRUEBA EXITOSA");
+
+        } catch (Exception e) {
+
+            JOptionPane.showMessageDialog(null, "Error En el proceso de cambio de estado a 'confirmar entrega', Element not found");
+            throw new MyExeption("Element not found");
+        }
 
     }
 

@@ -20,12 +20,12 @@ Feature: Validate the download to the database of Market orders
 #    And Click on the pay button
 #    Then Successful purchase
 #    And Validate fields in the database <Order> with Excel File <NameFile>
-    And Validate the complete flow from the Picking web dispatch window of the market order <Order> with the transport type <TransportType>
+    And Validate the complete flow from the Picking web dispatch window of the market order <Order> with the transport type selected
 #    And Validate the complete flow from the Picking web dispatch window of the buy and collect market order <Order>
 
     Examples:
-      | Product                    | Paymentmethod         | NameFile               | Order        |TransportType|
-      | Milo doy pack x 250 gramos | Tarjeta Credito Mixto | Campos_Mer_DP_TC_DE_PF | 948683429647 |Carro        |
+      | Product                    | Paymentmethod         | NameFile               | Order        |
+      | Milo doy pack x 250 gramos | Tarjeta Credito Mixto | Campos_Mer_DP_TC_DE_PF | 948683429647 |
 
 
 
@@ -44,7 +44,7 @@ Feature: Validate the download to the database of Market orders
 #    And Click on the pay button
 #    Then Successful purchase
 #    And Validate fields in the database <Order> with Excel File <NameFile>
-#    And Validate the complete flow from the Picking web dispatch window of the market order <Order> with the transport type <TransportType
+#    And Validate the complete flow from the Picking web dispatch window of the market order <Order> with the transport type <TransportType>
     And Validate the complete flow from the Picking web dispatch window of the buy and collect market order <Order>
 
     Examples:

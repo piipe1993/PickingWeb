@@ -12,12 +12,12 @@ public class PickingWebDefinition {
 
 
 
-    @And("^Validate the complete flow from the Picking web dispatch window of the market order (.*) with the transport type (.*)$")
-    public void validate_the_complete_flow_from_the_picking_web_dispatch_window_of_the_order_with_the_transport_type(String order, String transportType) {
+    @And("^Validate the complete flow from the Picking web dispatch window of the market order (.*) with the transport type selected$")
+    public void validate_the_complete_flow_from_the_picking_web_dispatch_window_of_the_order_with_the_transport_type(String order) {
         pickingWeb.searchOrder(order);
         pickingWeb.goToPickingState();
         pickingWeb.goToRegisterPosState();
-        pickingWeb.selectTransportBy(transportType);
+        pickingWeb.selectTransportBy();
         pickingWeb.confirmDelivery();
 
     }

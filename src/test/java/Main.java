@@ -1,5 +1,7 @@
+import net.serenitybdd.core.pages.PageObject;
 import org.junit.internal.TextListener;
 import org.junit.runner.JUnitCore;
+import picking.web.pages.PickingWebPages;
 import picking.web.runners.RunnerPickingWebMercadoCYR;
 import picking.web.runners.RunnerPickingWebMercadoDomicilio;
 import picking.web.utilities.MyExeption;
@@ -9,10 +11,8 @@ import javax.swing.JOptionPane;
 public class Main {
     public static void main(String[] args) {
 
-
         JUnitCore jUnitCore = new JUnitCore();
         jUnitCore.addListener(new TextListener(System.out));
-
 
         int TipoModalidadEntrega = JOptionPane.showOptionDialog(
                 null,
@@ -32,7 +32,7 @@ public class Main {
             jUnitCore.run(RunnerPickingWebMercadoCYR.class);
 
         }else{
-            throw new MyExeption("No se eligio modalidad despacho del pedido");
+            throw new MyExeption("No se selecciono la modalidad despacho del pedido");
         }
     }
 }
