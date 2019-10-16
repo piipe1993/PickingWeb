@@ -194,9 +194,11 @@ public class PickingWebSteps {
             waitTime(4);
             pickingWeb.getSelectActions().click();
             pickingWeb.getIconOrderDeliveredCYR().click();
+            waitTime(3);
             pickingWeb.getBtnSuccess().click();
+            waitTime(3);
             pickingWeb.getBtnCancel().click();
-            waitTime(4);
+            waitTime(3);
 
 //            if (pickingWeb.getSelectActions().isDisplayed()) {
 //                JOptionPane.showMessageDialog(null,"No se puedo avanzar el pedido al estado 'Confirmar entrega'");

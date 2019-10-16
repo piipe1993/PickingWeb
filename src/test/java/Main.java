@@ -32,6 +32,7 @@ public class Main {
             jUnitCore.run(RunnerPickingWebMercadoCYR.class);
 
         }else{
+            JOptionPane.showMessageDialog(null, "Proceso cancelado: No se selecciono la modalidad despacho del pedido\"");
             throw new MyExeption("No se selecciono la modalidad despacho del pedido");
         }
     }
